@@ -26,7 +26,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 public class Main {
 
 	// path to input/output file
-	private static final String INPUT = "FigS1.txt";
+	private static final String INPUT = "SequenceAssociation.txt";
 	private static final String OUTPUT = "output.txt";
 
 	// list to store edges
@@ -48,6 +48,11 @@ public class Main {
 	private Set<String> visited;
 
 	public static void main(String[] args) throws Exception {
+		int mb = 1024 * 1024;
+		// Getting the runtime reference from system
+		Runtime runtime = Runtime.getRuntime();
+		System.out.println("##### Heap utilization statistics [MB] #####");
+
 		Main main = new Main();
 		main.init();
 		main.readFile();
@@ -57,6 +62,9 @@ public class Main {
 		long end = System.currentTimeMillis();
 		System.out.println(end - start);
 		main.writeTextFile();
+
+		// Print used memory
+		System.out.println("Used Memory:" + (runtime.totalMemory() - runtime.freeMemory()) / mb);
 	}
 
 	// initialize
